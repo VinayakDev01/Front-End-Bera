@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="scripts.js" defer></script>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/output.css">
+
+    <title>Berachain Frontend</title>
+    
+</head>
+
+<body class="bg-zinc-900 pt-24 lg:pt-0">
+    <main class="p-8">
+        <h1 class="text-2xl text-white mb-4">Berachain Frontend</h1>
+
+        <!-- START: Main interaction to connect our wallet -->
+        <div class="mb-6">
+            <button type="button" disabled id="button-connect"
+                class="h-10 bg-zinc-200 text-zinc-800 px-5 rounded-full font-medium disabled:bg-opacity-30">Connect
+                Wallet (Unsupported)</button>
+            <div id="div-error-connect" class="mt-4 bg-red-300 rounded p-6 text-red-800 hidden"></div>
+        </div>
+        <!-- END -->
+
+        <hr class="border-zinc-700 mb-8" />
+
+        <!-- START: Main section that will appear when our wallet is connected -->
+        <section id="section-connected" class="hidden">
+            <h2 id="wallet-connection" class="text-xl text-zinc-200 mb-4">Wallet Connection</h2>
+
+            <p class="text-zinc-400 mb-4">If you're seeing this then your wallet is connected.</p>
+
+            <div class="mb-4">
+                <button type="button" id="button-disconnect"
+                    class="h-10 mb-2 bg-zinc-200 text-zinc-800 px-5 rounded-full font-medium disabled:bg-opacity-30">Disconnect*</button>
+                <p class="text-sm text-zinc-300"><small>*Remember you're not really disconnecting unless the wallet
+                        removes the website from Connected Sites.</small></p>
+            </div>
+            <div class="mb-4">
+                <label class="block mb-2 text-zinc-600">Wallet Connected</label>
+                <code class="block bg-zinc-500 p-6 rounded bg-zinc-800 text-zinc-200"><pre
+                        id="pre-wallet-address"></pre></code>
+            </div>
+            <div class="mb-6">
+                <label class="block mb-2 text-zinc-600">Network</label>
+                <code class="block bg-zinc-500 p-6 rounded bg-zinc-800 text-zinc-200"><pre
+                        id="pre-wallet-network"></pre></code>
+            </div>
+
+            <hr class="border-zinc-700 mb-8" />
+
+            <h2 id="eth-blocknumber" class="text-xl text-zinc-100 mb-4">Get Berachain Block Number</h2>
+
+            <p class="text-zinc-400 mb-4">Will make a JSON-RPC request to Berachain to retrieve the current block
+                number with <span class="bg-zinc-700 text-zinc-200 py-1 px-1.5 rounded">eth_blockNumber</span>.</p>
+
+            <form id="form-eth-blocknumber">
+                <div class="mb-4">
+                    <button type="submit"
+                        class="h-10 mb-2 bg-zinc-200 text-zinc-800 px-5 rounded-full font-medium disabled:bg-opacity-30">Get
+                        Block Number</button>
+                </div>
+
+                <!-- Where the results are displayed -->
+                <div class="mb-4">
+                    <label class="block mb-2 text-zinc-600">Response</label>
+                    <code
+                        class="block bg-zinc-500 p-6 rounded bg-zinc-800 text-zinc-200"><pre
+                            id="pre-eth-blocknumber"></pre></code>
+                </div>
+            </form>
+          
+        <!-- END -->
+
+        <button class="arrow-button" data-target="dice-game">Toggle Dice Game</button>
+        <button class="arrow-button" data-target="coin-flip-section">Toggle Coin Flip Game</button>
+        <button class="arrow-button" data-target="flappy-bird-game">Toggle Flappy Bird Game</button>
+
+        <!-- Dice Game Section -->
+        <section id="dice-game" class="hidden game-section">
+            <h2 class="text-xl text-zinc-200 mb-4">Dice Rolling Game</h2>
+
+            <p class="text-zinc-400 mb-4">Place a bet, roll the dice, and try to win!</p>
+
+            <div class="mb-4">
+                <label for="betAmount" class="block mb-2 text-zinc-600">Bet Amount:</label>
+                <input type="number" id="betAmount" min="1"
+                    class="h-8 px-4 border rounded focus:outline-none focus:border-zinc-300">
+            </div>
+
+            <button type="button" onclick="rollDice()" id="button-roll-dice"
+                class="h-10 bg-blue-500 text-white px-5 rounded-full font-medium disabled:bg-opacity-30">Roll
+                Dice</button>
+
+            <!-- Inside the "Dice Rolling Game" section -->
+            <div class="mt-4">
+                <p class="text-zinc-600">Dice Result:</p>
+                <code class="block bg-zinc-500 p-6 rounded bg-zinc-800 text-zinc-200"><pre
+                        id="pre-dice-result"></pre></code>
+            </div>
+        </section>
+
+        <!-- Coin Flip Game Section -->
+        <section id="coin-flip-section" class="hidden game-section">
+            <!-- Coin Flip Section -->
+            <h1 class="text-2xl text-white">Coin Flip Game</h1>
+            <p class="text-zinc-400">Click the coin to flip!</p>
+
+            <div class="flex items-center mb-6">
+                <button id="button-flip-coin"
+                    class="h-10 bg-blue-500 text-white px-5 rounded-full font-medium">Flip Coin</button>
+                <div id="coin" class="ml-4 w-8 h-8 border border-gray-300 rounded-full"></div>
+            </div>
+            <p id="coin-result" class="text-lg mb-4"></p>
+        </section>
+
+        <!-- Flappy Bird Game Section -->
+        <section id="flappy-bird-game" class="hidden game-section">
+            <!-- Flappy Bird Game -->
+            <h2 class="text-xl text-zinc-200 mb-4">Flappy Bird Game</h2>
+            <p class="text-zinc-400">Press Space Button to Play!</p></br>
+
+          <canvas id="flappy-bird-canvas"  style="border:1px solid #ad962c88;"></canvas>
+        </section>
+
+      </section>
+
+    <!-- END -->
+  </main>
+</body>
+</html>
